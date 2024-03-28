@@ -26,19 +26,30 @@ def new_car(make,model,year,owner):
     exec("global product\n" +
          "def product(getSet_field):\n" +
          "\tglobal " + owner + "\n" +
+
+         # Match getSet_field
          "\tmatch getSet_field:\n"+
+
+         # Getter cases
          "\t\tcase 'make': return '" + make + "'\n" +
          "\t\tcase 'model': return '" + model + "'\n" +
          "\t\tcase 'year': return '" + year + "'\n" +
+
+        # Setter cases
          "\t\tcase setMake if setMake[:setMake.find('=')].strip() == 'make':\n" +
-         "\t\t\tnew_car(setMake[setMake.find('=')+1:].strip(),'" + model + "','" + year + "','" +
-         owner + "')\n" +
+         "\t\t\tnew_car(setMake[setMake.find('=')+1:].strip(),'" + model +
+         "','" + year + "','" + owner + "')\n" +
+
          "\t\tcase setModel if setModel[:setModel.find('=')].strip() == 'model':\n" +
-         "\t\t\tnew_car('" + make + "', setModel[setModel.find('=')+1:].strip(),'" + year + "','" +
+         "\t\t\tnew_car('" + make +
+         "', setModel[setModel.find('=')+1:].strip(),'" + year + "','" +
          owner + "')\n" +
+         
          "\t\tcase setYear if setYear[:setYear.find('=')].strip() == 'year':\n" +
-         "\t\t\tnew_car('" + make + "','" + model + "', setYear[setYear.find('=')+1:].strip(),'" +
-         owner + "')\n" +
+         "\t\t\tnew_car('" + make + "','" + model +
+         "', setYear[setYear.find('=')+1:].strip(),'" + owner + "')\n" +
+
+        # Error/Default case
          "\t\tcase _:\n" +
          "\t\t\tprint('Error: `' + getSet_field +'` is not a field of', " +
          owner + ")\n" +
