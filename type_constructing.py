@@ -23,9 +23,8 @@ setters, etc.
 
 # specific type constructor `new_car`
 def new_car(make,model,year,owner):
-    exec("global product\n" +
-         "def product(getSet_field):\n" +
-         "\tglobal " + owner + "\n" +
+    exec("global " + owner + "\n" +
+         "def " + owner + "(getSet_field):\n" +
 
          # Match getSet_field
          "\tmatch getSet_field:\n"+
@@ -53,11 +52,36 @@ def new_car(make,model,year,owner):
          "\t\tcase _:\n" +
          "\t\t\tprint('Error: `' + getSet_field +'` is not a field of', " +
          owner + ")\n" +
-         "\t" + owner + " = product\n" +
-         "\treturn\n" +
-         owner + "= product"
+         
+         "\treturn\n"
     )
 
+new_car("tesla", "roadster", "2077", "my_car")
+for field in ["make", "model", "year"]:
+    print(my_car(field))
+print()
+
+my_car("year = 2030")
+for field in ["make", "model", "year"]:
+    print(my_car(field))
+print()
+
+new_car("toyota", "camry", "2024", "other_car")
+for field in ["make", "model", "year"]:
+    print(other_car(field))
+print()
+
+my_car = other_car
+
+for field in ["make", "model", "year"]:
+    print(my_car(field))
+print()
+
+other_car("model = corolla")
+
+for field in ["make", "model", "year"]:
+    print(my_car(field), other_car(field))
+print()
 
 # a function constructor `new_fn` where condouts = [[condition, output], ...]
 #def new_fn(condouts, this):
